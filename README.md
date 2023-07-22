@@ -177,3 +177,13 @@
    ```
 8. Open on WEB : http://127.0.0.1:8080/
 9. Copy all files on airflow/dags in this repository into the airflow directory
+
+
+
+## 5. Making API for Model :
+1. change directory to airflow/plugins/model_api
+2. Run Code  Next Step :
+   ```
+   docker build -t fast_api_model .
+   docker run -p 8000:8000 fast_api_model
+   ```
