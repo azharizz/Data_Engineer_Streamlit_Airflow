@@ -1,0 +1,110 @@
+CREATE TABLE "Account Type" (
+  account_type_id INT PRIMARY KEY,
+  account_type_description VARCHAR(255)
+);
+
+CREATE TABLE Branch (
+  branch_id INT PRIMARY KEY,
+  branch_name VARCHAR(255),
+  branch_location VARCHAR(255)
+);
+
+CREATE TABLE Customer (
+  customer_id INT PRIMARY KEY,
+  customer_name VARCHAR(255),
+  customer_address VARCHAR(255),
+  customer_contact VARCHAR(255)
+);
+
+CREATE TABLE "Transaction Type" (
+  transaction_type_id INT PRIMARY KEY,
+  transaction_type_description VARCHAR(255)
+);
+
+CREATE TABLE Account (
+  account_id INT PRIMARY KEY,
+  account_number VARCHAR(255),
+  account_type_id INT,
+  branch_id INT,
+  FOREIGN KEY (account_type_id) REFERENCES "Account Type" (account_type_id),
+  FOREIGN KEY (branch_id) REFERENCES Branch (branch_id)
+);
+
+CREATE TABLE Transactions (
+  transaction_id INT PRIMARY KEY,
+  account_id INT,
+  customer_id INT,
+  transaction_date DATE,
+  transaction_amount NUMERIC(10,2),
+  transaction_type_id INT,
+  FOREIGN KEY (account_id) REFERENCES Account (account_id),
+  FOREIGN KEY (customer_id) REFERENCES Customer (customer_id),
+  FOREIGN KEY (transaction_type_id) REFERENCES "Transaction Type" (transaction_type_id)
+);
+
+
+
+-- Insert data into the Account Type table
+INSERT INTO "Account Type" (account_type_id, account_type_description)
+VALUES
+  (1, 'Savings'),
+  (2, 'Checking'),
+  (3, 'Credit'),
+  (4, 'Loan'),
+  (5, 'Investment');
+
+-- Insert data into the Branch table
+INSERT INTO Branch (branch_id, branch_name, branch_location)
+VALUES
+  (1, 'Main Branch', 'New York'),
+  (2, 'Downtown Branch', 'Chicago'),
+  (3, 'West Branch', 'Los Angeles'),
+  (4, 'North Branch', 'Seattle'),
+  (5, 'East Branch', 'Miami');
+
+-- Insert data into the Customer table
+INSERT INTO Customer (customer_id, customer_name, customer_address, customer_contact)
+VALUES
+  (1, 'John Smith', '123 Main Street', 'john.smith@example.com'),
+  (2, 'Jane Doe', '456 Elm Avenue', 'jane.doe@example.com'),
+  (3, 'Michael Johnson', '789 Oak Drive', 'michael.johnson@example.com'),
+  (4, 'Sarah Johnson', '987 Pine Street', 'sarah.johnson@example.com'),
+  (5, 'Robert Davis', '654 Maple Avenue', 'robert.davis@example.com');
+
+-- Insert data into the Transaction Type table
+INSERT INTO "Transaction Type" (transaction_type_id, transaction_type_description)
+VALUES
+  (1, 'Deposit'),
+  (2, 'Withdrawal'),
+  (3, 'Transfer'),
+  (4, 'Payment'),
+  (5, 'Bill Payment');
+
+-- Insert data into the Account table
+INSERT INTO Account (account_id, account_number, account_type_id, branch_id)
+VALUES
+  (1, '100001', 1, 1),
+  (2, '100002', 2, 2),
+  (3, '100003', 1, 3),
+  (4, '100004', 3, 1),
+  (5, '100005', 2, 4),
+  (6, '100006', 4, 2);
+
+-- Insert data into the Transactions table
+INSERT INTO Transactions (transaction_id, account_id, customer_id, transaction_date, transaction_amount, transaction_type_id)
+VALUES
+  (1, 1, 1, '2023-07-01', 500.00, 1),
+  (2, 2, 2, '2023-07-02', 250.00, 1),
+  (3, 3, 3, '2023-07-03', 1000.00, 2),
+  (4, 2, 3, '2023-07-04', -50.00, 2),
+  (5, 3, 1, '2023-07-05', 200.00, 1),
+  (6, 1, 4, '2023-07-06', 1500.00, 1),
+  (7, 4, 5, '2023-07-07', 300.00, 3),
+  (8, 5, 2, '2023-07-08', -100.00, 2),
+  (9, 6, 3, '2023-07-09', 1000.00, 4),
+  (10, 2, 5, '2023-07-10', -75.00, 2),
+  (11, 1, 2, '2023-07-11', 400.00, 1),
+  (12, 3, 4, '2023-07-12', -200.00, 2),
+  (13, 4, 1, '2023-07-13', 600.00, 3),
+  (14, 5, 3, '2023-07-14', -150.00, 2),
+  (15, 6, 5, '2023-07-15', 800.00, 1);
