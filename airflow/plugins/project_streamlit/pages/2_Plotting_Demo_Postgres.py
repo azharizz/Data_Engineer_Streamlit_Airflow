@@ -9,7 +9,7 @@ st.set_page_config(page_title="Plotting Demo Postgres", page_icon="📈")
 st.sidebar.header("📈 Plotting Demo Postgres")
 
 # Database connection settings
-DB_HOST = "172.17.21.135"
+DB_HOST = "<YOUR-IP-ADDRESS>"
 DB_NAME = "postgres"
 DB_USER = "postgres"
 DB_PASSWORD = "secret"
