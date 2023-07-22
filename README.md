@@ -1,5 +1,13 @@
 # STEP BY STEP FOR THIS PROJECT ON WINDOWS
 
+
+### NOTE : PLEASE CHECK THIS FOR DOCKER IF CANNOT BE ACCESSABLE
+   If running 'docker ps' cannot be accesable you should run :
+   ```
+   sudo service docker start
+   ```
+
+
 ## INSTALL WSL Ubuntu 20.0 Version on microsoft store 
 ## Also in this section i will guide to python installation
 
@@ -67,6 +75,8 @@
    sudo service docker start
    sudo docker run hello-world
    ```
+
+   
 ## 2. Install Postgres and PGAdmin4
 1. Run Code & Copy Output for your IP address :
    ```
@@ -85,4 +95,85 @@
    ```
 5. Open on website 127.0.0.1:80 and input email is "admin@admin.com" password is "secret"
 6. Make connection with hostname is your ip address on step number 1, Database = postgres, username = postgres, password = secret
-7. Query to create table and insert 
+7. Query to create table and insert on table_postgres.txt in this repository
+
+
+## 3. Install Streamlit
+1. Run Code  Next Step :
+   ```
+   nano ~/.bashrc
+   ```
+   
+   Add in end of line with (Paling bawah tambah 1 enter) :
+   ```
+   alias pip='python -m pip'
+   ```
+2. Run Code Next Step :
+   ```
+   source ~/.bashrc
+   pip install streamlit
+   pip install psycopg2-binary
+   pip install scikit-learn
+   pip install matplotlib
+   ```
+3. Copy code + directory on this repository airflow/plugins/project_streamlit
+4. Run Code Next Step :
+   ```
+   streamlit run Hello.py
+   ```
+5. Change directory to file located for Hello.py :
+   ```
+   docker build -t streamlit-app .
+   docker run -p 8501:8501 streamlit-app
+   ```
+
+## 4. Install Airflow
+1. Run Code  Next Step :
+   ```
+   curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.6.3/docker-compose.yaml'
+   ```
+
+2. Run Code  Next Step :
+   ```
+   nano Dockerfile 
+   ```
+   Input this or you can copy from this repository airflow/Dockerfile:
+   ```
+   FROM apache/airflow:2.6.3
+   USER root
+   USER airflow
+   COPY requirements.txt /
+   RUN pip install -r /requirements.txt
+   ```
+3. Please copy the requirements.txt on airflow/requirements.txt
+4. Run Code Next Step :
+   ```
+   docker build -t airflow_custom .
+   ```
+5. Run Code  Next Step :
+   ```
+   nano Dockerfile 
+   ```
+   Find and replace or you can copy all from airflow/docker-compose.yml:
+   ```
+   version: '3.8'
+   x-airflow-common:
+     &airflow-common
+     # In order to add custom dependencies or upgrade provider packages you can use your extended image.
+     # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
+     # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
+     image: ${AIRFLOW_IMAGE_NAME:-airflow_custom} <------------------ REPLACE THIS !!!
+
+   
+   ```
+6. Run Code  Next Step :
+   ```
+   mkdir -p ./dags ./logs ./plugins ./config
+   echo -e "AIRFLOW_UID=$50000\nAIRFLOW_GID=0" > .env
+   ```
+7. Run Code  Next Step :
+   ```
+   docker compose up
+   ```
+8. Open on WEB : http://127.0.0.1:8080/
+9. Copy all files on airflow/dags in this repository into the airflow directory
