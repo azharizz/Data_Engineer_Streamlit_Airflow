@@ -187,3 +187,17 @@
    docker build -t fast_api_model .
    docker run -p 8000:8000 fast_api_model
    ```
+
+
+
+
+
+# **Project Output** :
+
+![image](https://github.com/azharizz/Data_Engineer_Streamlit_Airflow/assets/45253059/0821471e-f97b-4f6e-8c5a-e737da0f3efd)
+
+![image](https://github.com/azharizz/Data_Engineer_Streamlit_Airflow/assets/45253059/88660637-442f-4255-8e0c-169cdb2780aa)
+
+![image](https://github.com/azharizz/Data_Engineer_Streamlit_Airflow/assets/45253059/6e23a37b-cfd9-4fc5-8de9-2f0f99e39e9b)
+
+
