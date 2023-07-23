@@ -152,7 +152,7 @@
    ```
 5. Run Code  Next Step :
    ```
-   nano Dockerfile 
+   nano docker-compose.yaml 
    ```
    Find and replace or you can copy all from airflow/docker-compose.yml:
    ```
