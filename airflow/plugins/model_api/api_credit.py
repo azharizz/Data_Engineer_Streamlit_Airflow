@@ -37,8 +37,10 @@ def predict(data: InputData):
 
         print(df)
 
-        model = joblib.load("best_model.pkl")
-        scaler = joblib.load("std_scaler.pkl")
+        model = joblib.load("/home/model/best_model.pkl")
+        scaler = joblib.load("/home/model/std_scaler.pkl")
+
+        print('SUCCESS LOAD MODEL')
 
         X = scaler.transform([df.iloc[0]])
 
@@ -54,7 +56,8 @@ def predict(data: InputData):
         }  # Assuming your model outputs a single prediction
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        #raise HTTPException(status_code=500, detail=str(e))
+        raise e
 
 
 if __name__ == "__main__":
