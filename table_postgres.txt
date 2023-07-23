@@ -35,7 +35,7 @@ CREATE TABLE Transactions (
   account_id INT,
   customer_id INT,
   transaction_date DATE,
-  transaction_amount NUMERIC(10,2),
+  transaction_amount float,
   transaction_type_id INT,
   FOREIGN KEY (account_id) REFERENCES Account (account_id),
   FOREIGN KEY (customer_id) REFERENCES Customer (customer_id),
