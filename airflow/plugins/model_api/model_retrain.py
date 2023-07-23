@@ -61,7 +61,7 @@ def get_best_model(list_of_model, list_of_param, train_X, train_y, test_X, test_
     )
 
     # save your model or results
-    joblib.dump(best_model_obj, "/opt/airflow/plugins/model_api/best_model.pkl")
+    joblib.dump(best_model_obj, "/opt/airflow/plugins/model_api/model/best_model.pkl")
 
     print("Model saved !")
 
@@ -104,12 +104,14 @@ def retrain_run():
     X_train_std = scaler.transform(X_train)
     X_test_std = scaler.transform(X_test)
 
-    joblib.dump(scaler, "/opt/airflow/plugins/model_api/std_scaler.pkl")
+    joblib.dump(scaler, "/opt/airflow/plugins/model_api/model/std_scaler.pkl")
 
     # Undersampling
     ros = RandomUnderSampler(random_state=42)
 
-    X_resample, y_resample = ros.fit_resample(X_train_std, y_train)
+    #X_resample, y_resample = ros.fit_resample(X_train_std, y_train)
+    X_resample = X_train_std
+    y_resample = y_train
 
     # Modeling
     knn = KNeighborsClassifier()
@@ -127,7 +129,7 @@ def retrain_run():
 
     # 'n_neighbors': [50, 100, 200]
     knn_params = {
-        "n_neighbors": [100],
+        "n_neighbors": [50, 100, 200],
     }
 
     # 'penalty': ['l1', 'l2'],
@@ -136,10 +138,10 @@ def retrain_run():
     lgr_params = {"penalty": ["l2"], "C": [0.01], "max_iter": [300]}
 
     # 'n_estimators': [5, 10, 25, 50]
-    xgb_params = {"n_estimators": [10]}
+    xgb_params = {"n_estimators": [5, 10, 25, 50]}
 
     # 'n_estimators': [5, 10, 25, 50]
-    rf_params = {"n_estimators": [10]}
+    rf_params = {"n_estimators": [5, 10, 25, 50]}
 
     # Create model params
     list_of_param = {
