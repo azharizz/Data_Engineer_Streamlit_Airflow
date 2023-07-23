@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  app:
+    image: fast_api_model
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./model:/home/model
