@@ -181,11 +181,11 @@
 
 
 ## 5. Making API for Model :
-1. change directory to airflow/plugins/model_api
+1. change directory to airflow/plugins/model_api and copy all files and folder there
 2. Run Code  Next Step :
    ```
    docker build -t fast_api_model .
-   docker run -p 8000:8000 fast_api_model
+   docker compose up
    ```
 
 
