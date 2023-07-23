@@ -68,7 +68,7 @@ def main():
             "NumberOfDependents": NumberOfDependents,
         }
 
-        response = requests.post("http://172.17.21.135:8000/predict/", json=input_data)
+        response = requests.post("http://<YOUR-IP-ADDRESS>:8000/predict/", json=input_data)
         # print(response.json())
 
         prediction = response.json()["prediction"] * 100
