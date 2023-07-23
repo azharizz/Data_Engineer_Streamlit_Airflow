@@ -8,9 +8,9 @@ pandas
 psycopg2-binary
 pydantic
 requests
-scikit-learn
+scikit-learn==1.0.2
 scipy
 streamlit
 urllib3
 uvicorn
-xgboost
+xgboost==1.6.2
