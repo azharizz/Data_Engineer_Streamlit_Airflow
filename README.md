@@ -177,7 +177,7 @@
    ```
 8. Open on WEB : http://127.0.0.1:8080/
 9. Copy all files on airflow/dags in this repository into the airflow directory
-
+9. Login with username is "airflow" and password is "airflow"
 
 
 ## 5. Making API for Model :
