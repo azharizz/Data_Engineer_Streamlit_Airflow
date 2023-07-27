@@ -96,8 +96,8 @@ def main():
 
         print(df)
 
-        model = joblib.load("best_model.pkl")
-        scaler = joblib.load("std_scaler.pkl")
+        model = joblib.load("/mount/src/data_engineer_streamlit_airflow/airflow/plugins/project_streamlit/pages/best_model.pkl")
+        scaler = joblib.load("/mount/src/data_engineer_streamlit_airflow/airflow/plugins/project_streamlit/pages/std_scaler.pkl")
 
         print('SUCCESS LOAD MODEL')
 
