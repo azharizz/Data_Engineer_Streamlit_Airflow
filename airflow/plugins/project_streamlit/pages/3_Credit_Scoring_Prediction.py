@@ -1,5 +1,7 @@
 import streamlit as st
 import requests
+import pandas as pd
+import joblib
 
 st.set_page_config(page_title="Credit Scoring Prediction", page_icon="📊")
 st.sidebar.header("📊 Credit Scoring Prediction")
@@ -54,24 +56,56 @@ def main():
     )
 
     # Execute the query and display results
+    # if st.sidebar.button("Predict"):
+    #     input_data = {
+    #         "RevolvingUtilizationOfUnsecuredLines": RevolvingUtilizationOfUnsecuredLines,
+    #         "age": age,
+    #         "DaysPastDueNotWorse_30_59": DaysPastDueNotWorse_30_59,
+    #         "DebtRatio": DebtRatio,
+    #         "MonthlyIncome": MonthlyIncome,
+    #         "NumberOfOpenCreditLinesAndLoans": NumberOfOpenCreditLinesAndLoans,
+    #         "NumberOfTimes90DaysLate": NumberOfTimes90DaysLate,
+    #         "NumberRealEstateLoansOrLines": NumberRealEstateLoansOrLines,
+    #         "DaysPastDueNotWorse_60_89": DaysPastDueNotWorse_60_89,
+    #         "NumberOfDependents": NumberOfDependents,
+    #     }
+
+    #     response = requests.post("http://<YOUR-IP-ADDRESS>:8000/predict/", json=input_data)
+    #     # print(response.json())
+
+    #     prediction = response.json()["prediction"] * 100
+
+    #     st.success(f"Successfully Predict! (Good Score Percentage : {prediction}) %")
+        
+        
     if st.sidebar.button("Predict"):
         input_data = {
-            "RevolvingUtilizationOfUnsecuredLines": RevolvingUtilizationOfUnsecuredLines,
-            "age": age,
-            "DaysPastDueNotWorse_30_59": DaysPastDueNotWorse_30_59,
-            "DebtRatio": DebtRatio,
-            "MonthlyIncome": MonthlyIncome,
-            "NumberOfOpenCreditLinesAndLoans": NumberOfOpenCreditLinesAndLoans,
-            "NumberOfTimes90DaysLate": NumberOfTimes90DaysLate,
-            "NumberRealEstateLoansOrLines": NumberRealEstateLoansOrLines,
-            "DaysPastDueNotWorse_60_89": DaysPastDueNotWorse_60_89,
-            "NumberOfDependents": NumberOfDependents,
-        }
+        "RevolvingUtilizationOfUnsecuredLines": [RevolvingUtilizationOfUnsecuredLines],
+        "age": [age],
+        "DaysPastDueNotWorse_30_59": [DaysPastDueNotWorse_30_59],
+        "DebtRatio": [DebtRatio],
+        "MonthlyIncome": [MonthlyIncome],
+        "NumberOfOpenCreditLinesAndLoans": [NumberOfOpenCreditLinesAndLoans],
+        "NumberOfTimes90DaysLate": [NumberOfTimes90DaysLate],
+        "NumberRealEstateLoansOrLines": [NumberRealEstateLoansOrLines],
+        "DaysPastDueNotWorse_60_89": [DaysPastDueNotWorse_60_89],
+        "NumberOfDependents": [NumberOfDependents],
+    }
+    
+        df = pd.DataFrame.from_dict(input_data)
 
-        response = requests.post("http://<YOUR-IP-ADDRESS>:8000/predict/", json=input_data)
-        # print(response.json())
+        print(df)
 
-        prediction = response.json()["prediction"] * 100
+        model = joblib.load("best_model.pkl")
+        scaler = joblib.load("std_scaler.pkl")
+
+        print('SUCCESS LOAD MODEL')
+
+        X = scaler.transform([df.iloc[0]])
+
+        prediction_list = model.predict_proba(X).tolist()
+        prediction = prediction_list[0][0] * 100
+
 
         st.success(f"Successfully Predict! (Good Score Percentage : {prediction}) %")
 
