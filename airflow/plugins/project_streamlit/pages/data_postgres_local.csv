@@ -1,0 +1,16 @@
+transaction_date,transaction_amount,transaction_type_description
+2023-07-02,250.0,Deposit
+2023-07-03,1000.0,Withdrawal
+2023-07-04,-50.0,Withdrawal
+2023-07-05,200.0,Deposit
+2023-07-06,1500.0,Deposit
+2023-07-07,300.0,Transfer
+2023-07-08,-100.0,Withdrawal
+2023-07-09,1000.0,Payment
+2023-07-10,-75.0,Withdrawal
+2023-07-11,400.0,Deposit
+2023-07-12,-200.0,Withdrawal
+2023-07-13,600.0,Transfer
+2023-07-14,-150.0,Withdrawal
+2023-07-15,800.0,Deposit
+2023-07-01,1000.0,Deposit
