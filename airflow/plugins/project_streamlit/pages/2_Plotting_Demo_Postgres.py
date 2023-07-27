@@ -152,10 +152,65 @@ def streaming_data(text_placeholder):
 
     time.sleep(1)
 
+def main_local():
+
+    data = pd.read_csv('data_postgres_local.csv')
+
+    min_date, max_date = data["transaction_date"].min(), data["transaction_date"].max()
+
+    start_date, end_date = st.sidebar.date_input(
+        label="Date Range",
+        min_value=min_date,
+        max_value=max_date,
+        value=[data["transaction_date"].min(), data["transaction_date"].max()],
+    )
+
+    data = data[
+        (data["transaction_date"] >= start_date)
+        & (data["transaction_date"] <= end_date)
+    ]
+
+    transaction_types = ["All"] + list(data["transaction_type_description"].unique())
+    transaction_types_select = st.sidebar.selectbox(
+        label="Transaction Type", options=transaction_types
+    )
+
+    if transaction_types_select != "All":
+        data = data[data["transaction_type_description"] == transaction_types_select]
+
+    # Line Chart
+    st.subheader("Time Series Plot")
+
+    data_line = data[["transaction_date", "transaction_amount"]]
+    data_line = data_line.set_index("transaction_date")
+
+    st.line_chart(data_line)
+
+    # Bar Chart
+    st.subheader("Transaction Type Plot")
+
+    data_bar = data.groupby(["transaction_type_description"]).count()
+    st.bar_chart(data=data_bar)
+
+    # External Chart
+    st.subheader("External Plot")
+    fig, ax = plt.subplots(figsize=(10, 6), facecolor="lightgray")
+
+    ax.plot(data["transaction_date"], data["transaction_amount"], color="goldenrod")
+
+    ax.set_facecolor("lightcyan")
+    ax.yaxis.grid(color="gray", linestyle="dashed")
+
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Amount")
+    ax.set_title("External Line Plot of Time Series")
+
+    st.pyplot(fig)
 
 # Run the app
 if __name__ == "__main__":
-    main()
+    # main()
+    main_local()
     # text_placeholder = st.empty()
 
     # while True:
