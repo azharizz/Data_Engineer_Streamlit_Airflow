@@ -155,7 +155,7 @@ def streaming_data(text_placeholder):
 def main_local():
 
     data = pd.read_csv('/mount/src/data_engineer_streamlit_airflow/airflow/plugins/project_streamlit/pages/data_postgres_local.csv')
-    data['transaction_date'] = pd.to_datetime(data['transaction_date'])
+    data['transaction_date'] = pd.to_datetime(data['transaction_date']).dt.date
 
     min_date, max_date = data["transaction_date"].min(), data["transaction_date"].max()
 
