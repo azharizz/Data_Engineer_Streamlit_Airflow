@@ -57,3 +57,5 @@ urllib3==2.0.3
 validators==0.20.0
 watchdog==3.0.0
 zipp==3.16.2
+xgboost==1.6.2
+scikit-learn==1.0.2
