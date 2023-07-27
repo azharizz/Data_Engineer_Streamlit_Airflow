@@ -203,3 +203,20 @@ You can visit this project : https://dataengineer-azhar-test.streamlit.app/
 ![image](https://github.com/azharizz/Data_Engineer_Streamlit_Airflow/assets/45253059/6e23a37b-cfd9-4fc5-8de9-2f0f99e39e9b)
 
 
+
+
+Note:
+
+Docker : Pembungkus tiap tools aplikasi pada project dalam bentuk container, memungkinkan untuk menjalan banyak aplikasi menggunakan os linux.
+
+Postgres : Sebagai database yang akan kita tarik data nya untuk visualisasi dari Streamlit (Bisa juga sebagai proses ETL, Data pada model retrain)
+
+PgAdmin : UI dari postgres dan memudahkan kita untuk melakukan Data Modeling pada Postgres
+
+Streamlit : Sebagai framework / tools yang tujuannya itu memvisualisasikan data, mengintegrasi Machine Learning, dan mempublikasikan hasil project ke publik dengan streamlit share.
+
+Airflow : Sebagai orchestrator / tools scheduler untuk menjalankan suatu job yang dimana itu proses retrain model.
+
+FastAPI : Framework yang tujuannya dijadikan API untuk ML Model yang berfungsi sebagai prediksi kredit scoring
+
+ML Model : Machine Learning menggunakan Scikit-learn dan juga RandomizedSearchCV untuk mencari parameter terbaik
