@@ -154,7 +154,7 @@ def streaming_data(text_placeholder):
 
 def main_local():
 
-    data = pd.read_csv('data_postgres_local.csv')
+    data = pd.read_csv('./pages/data_postgres_local.csv')
 
     min_date, max_date = data["transaction_date"].min(), data["transaction_date"].max()
 
