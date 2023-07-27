@@ -209,6 +209,13 @@ def main_local():
 
 # Run the app
 if __name__ == "__main__":
+    #importing the os module
+    import os
+    
+    #to get the current working directory
+    directory = os.getcwd()
+    
+    st.text(directory)
     # main()
     main_local()
     # text_placeholder = st.empty()
